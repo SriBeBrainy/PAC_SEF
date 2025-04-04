@@ -1,13 +1,10 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Mar 18 11:19:24 2024
 
-@author: srdas
+
 """
-"""
-This code does all the preprocessing of the individual MEG files, and then saves the preprocessed
+# This code does all the preprocessing of the individual MEG files, and then saves the preprocessed
 file in the raw data folder. This code is meant for tasks with events denoted.
 
+Based on MNE-Python
 """
 
 #%% Import modules
