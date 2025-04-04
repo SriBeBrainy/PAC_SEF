@@ -8,6 +8,7 @@ Based on MNE-Python
 """
 
 #%% Import modules
+# Include all relevant modules
 import os
 import os.path as op
 import sys
@@ -23,6 +24,7 @@ import mne
 plt.ion()
 
 #%% Check string for file of interest
+# The inputs in this section will vary depending on the file name
 directory = ''      #include the complete directory of the data files
 data_read = 'rawdata'
 subject_id = 'sub-'   #patient ID
@@ -45,6 +47,7 @@ raw = mne.io.read_raw_fif(raw_file,preload=True)
 raw.plot()
 
 #%% Separate MEG data
+# Only the MEG, STIM, ECG and EOG channels were included
 raw_meg = raw.copy().pick(['meg','stim','ecg','eog'])
 
 #%% Notch filter
@@ -80,14 +83,13 @@ raw_meg.filter(l_freq=1,h_freq=None,phase='zero-double')
 #%% #%% ICA preprocessing
 ica = mne.preprocessing.ICA(n_components=None,random_state=97,method='picard',max_iter=1000)
 ica.fit(raw_meg,picks='meg',reject_by_annotation=True)
-#explained_var_ratio = ica.get_explained_variance_ratio(raw_meg)
 
 #%% Determine components to exclude
 ica.plot_sources(raw_meg,start=0,stop=10,show_scrollbars=True)
 ica.plot_components(inst=raw_meg)         
 
 #%% Exclude components
-ica.exclude = [22]
+ica.exclude = []    # include all the components with artifacts
 ica_rank = len(ica.exclude)
 ica.apply(inst=raw_meg)
 raw_meg.plot()
