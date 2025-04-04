@@ -8,13 +8,13 @@ clear
 
 %% Step 1: Define input data
 % Addpath
-addpath("U:\shared\users\sdas\brainstorm_db\PAC_current\tensor_toolbox-v3.6");
+addpath("....\tensor_toolbox-v3.6");  % include the entire path where tensor toolbox is located
 
 % Load file containing scout names
 load("Destrieux_row_names.mat");
 
 % Define the base directory where your data is stored
-base_dir = 'U:\shared\users\sdas\meg-UNMC_results\';
+base_dir = '...';
 
 % Define tasks and sides
 tasks = {'SEF','SEF'};                   %only SEF will be used for classifier
@@ -222,6 +222,7 @@ for k = 1:length(fp_id)
 end
 
 % Step 4: Plot the results
+% This section is optional, to be used for visualizing the classifier performance
 
 % Plot 1: False Positives per Patient
 figure;
@@ -270,12 +271,5 @@ ylabel('Number of True Positives');
 title('True Positives per Task');
 grid on;
 
-% Plot 6: True Positives per Brain Region
-figure;
-histogram(tp_brain_regions, 1:num_scouts+1);
-xlabel('Brain Region');
-ylabel('Number of True Positives');
-title('True Positives per Brain Region');
-xticks(1:num_scouts);
-grid on;
+
 
