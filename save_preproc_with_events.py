@@ -1,8 +1,8 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Aug 22 12:24:02 2023
 
-@author: srdas
+"""
+This code is meant for spontaneous data wherein we introduce fixed length events.
+
+Based on MNE-Python
 """
 
 #%% Import modules
@@ -21,14 +21,15 @@ import mne
 plt.ion()
 
 #%% Check string for file of interest
-directory = 'U:/shared/database/meg-ieeg-UNMC/'
-data_read = 'rawdata'
-subject_id = 'sub-unmc1156'
-session = 'ses-meg01'
-modality = 'meg'
+# The inputs in this section will vary depending on the file name
+directory = ''         #include the complete directory of the data files
+data_read = 'rawdata'   #type of data
+subject_id = 'sub-'   #subject ID
+session = 'ses-meg01'   #name of session
+modality = 'meg'        #meg or eeg
 task = 'spont'
 side = 'None'
-run = '02'
+run = '01'      
 
 if(side == 'None'):
     side = ''
@@ -78,15 +79,13 @@ raw_meg.filter(l_freq=1,h_freq=None,phase='zero-double')
 #%% #%% ICA preprocessing
 ica = mne.preprocessing.ICA(n_components=None,random_state=97,method='picard',max_iter=1000)
 ica.fit(raw_meg,picks='meg',reject_by_annotation=True)
-#explained_var_ratio = ica.get_explained_variance_ratio(raw_meg)
-
 
 #%% Determine components to exclude
 ica.plot_sources(raw_meg,start=0,stop=10,show_scrollbars=True)
 ica.plot_components(inst=raw_meg)         
 
 #%% Exclude components
-ica.exclude = [0,1,2,34]
+ica.exclude = []    # include all the components with artifacts
 ica_rank = len(ica.exclude)
 ica.apply(inst=raw_meg)
 raw_meg.plot()
@@ -101,5 +100,5 @@ raw_with_events = raw_meg.add_events(events_new)
 
 #%% Save raw file with events
 preproc_file_name = (subject_id + '_' + session + '_task-' + task_id + '_run-' + run + '_proc-preproc_meg.fif')
-preproc_file = ('U:/shared/users/sdas/meg-UNMC_results/' + subject_id + '/spont/preproc_data/' + preproc_file_name)
+preproc_file = ''   #path where the preprocessed file will be stored
 raw_meg.copy().save(preproc_file, picks='all',tmin=0,tmax=None,proj=True,fmt='double',overwrite=True)
