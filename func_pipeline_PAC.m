@@ -1,6 +1,8 @@
+% Written by Srijita Das
+
 function func_pipeline_PAC(subjectID, task, side)
 
-addpath("U:\shared\users\sdas\brainstorm_db\brainstorm3");
+addpath("....\brainstorm3");    %path where brainstorm3 folder is located
 
 % Input files
 sFiles_temp = {...
@@ -11,7 +13,7 @@ SubjectNames = {...
 eventname = strcat(subjectID,task,side);
 
 % Output folder destination
-dest_dir = ['U:\shared\users\sdas\meg-UNMC_results\sub-' subjectID '\PAC\' task];
+dest_dir = ['...\sub-' subjectID '\PAC\' task];
 % Start a new report
 bst_report('Start', sFiles);
 
@@ -140,7 +142,7 @@ bst_report('Open', ReportFile);
 
 % Save PAC 
 temp = sFiles.FileName;
-PAC_data = load(fullfile('U:\shared\users\sdas\brainstorm_db\PAC_current\data',temp));
+PAC_data = load(fullfile('....',temp));
 f_name=fullfile(dest_dir, strcat(task,side,'.mat'));
 save(f_name,'-struct','PAC_data');
 
