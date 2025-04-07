@@ -3,16 +3,18 @@
 % Written by Srijita Das
 % Modified on July 30, 2024
 
+% Based on results from func_pipeline_PAC
+
 clear
 %% Step 1: Define input data
 % Addpath
-addpath("U:\shared\users\sdas\brainstorm_db\PAC_current\tensor_toolbox-v3.6");
+addpath("...\tensor_toolbox-v3.6");   #path where tensor toolbox is stored
 
 % Load file containing scout names
 load("Destrieux_row_names.mat")
 
 % Define the base directory where your data is stored
-base_dir = 'U:\shared\users\sdas\meg-UNMC_results\';
+base_dir = '...';
 
 % Define tasks and sides
 tasks = {'SEF','SEF','spont'};
