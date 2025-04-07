@@ -14,7 +14,7 @@ clear
 load("Destrieux_row_names.mat");
 
 % Define the base directory where your data is stored
-base_dir = 'U:\shared\users\sdas\meg-UNMC_results\';
+base_dir = '....';
 
 % Define tasks and sides
 tasks = {'SEF', 'SEF', 'spont'};
@@ -26,7 +26,8 @@ patient_names = {patients_all([patients_all.isdir]).name};
 patient_names = patient_names(~ismember(patient_names, {'.', '..'}));
 patient_names = patient_names(1:137); % select the range of patients you want to include
 
-% Define expected brain regions
+% Define expected brain regions for SEF
+% as per the Destrieux atlas
 exp_indices_UL = [52, 56, 58, 90, 134, 138];
 exp_indices_UR = [51, 55, 57, 89, 133, 137];
 
